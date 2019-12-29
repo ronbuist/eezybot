@@ -23,7 +23,7 @@
     var realPixelCount = 0;
 
     // General functions.
-    function positionLimit(pos) {
+    function positionLimit (pos) {
         pos = Math.floor(pos);
         pos = parseInt(pos);
         pos = Math.min(180,pos);
@@ -36,8 +36,11 @@
 
         window.socket = new WebSocket("ws:" + hostname + ":" + String(port));
 
-        // initialize the EEZYbot server
-        window.socket.send("init");
+	window.socket.onopen = function () {
+
+	        // initialize the EEZYbot server
+        	window.socket.send("init");
+	};
 
         // change status light from yellow to green.
         myMsg = 'ready';
@@ -66,7 +69,7 @@
 
     // when the set gripper block is executed
     ext.setGripper = function (pos) {
-	pos = positionLimit(pos);
+	pos = positionLimit (pos);
         var msg = "setgripper " + String(pos);
     	window.socket.send(msg);
     };
