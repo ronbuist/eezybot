@@ -69,7 +69,7 @@
 
     // when the set gripper block is executed
     ext.setGripper = function (pos) {
-	pos = positionLimit (pos);
+	//pos = positionLimit (pos);
         var msg = "setgripper " + String(pos);
     	window.socket.send(msg);
     };
