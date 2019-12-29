@@ -32,27 +32,18 @@
     };
 
     // when the connect to server block is executed.
-    ext.cnct = function (hostname, port, callback) {
+    ext.cnct = function (hostname, port) {
+
         window.socket = new WebSocket("ws:" + hostname + ":" + String(port));
-        window.socket.onopen = function () {
 
-            // initialize the EEZYbot server
-            window.socket.send("init");
+        // initialize the EEZYbot server
+        window.socket.send("init");
 
-            // change status light from yellow to green.
-            myMsg = 'ready';
-            connected = true;
-            myStatus = 2;
+        // change status light from yellow to green.
+        myMsg = 'ready';
+        connected = true;
+        myStatus = 2;
 
-        };
-
-        window.socket.onclose = function (e) {
-            console.log("Connection closed.");
-            socket = null;
-            connected = false;
-            myMsg = 'not_ready'; // back to yellow status.
-            myStatus = 1;
-        };
     };
 
     // Cleanup function when the extension is unloaded
