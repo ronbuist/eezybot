@@ -24,10 +24,10 @@
 
     // General functions.
     function positionLimit(pos) {
-        pos = Math.floor(color);
-        pos = parseInt(color);
-        pos = Math.min(180,color);
-        pos = Math.max(0,color);
+        pos = Math.floor(pos);
+        pos = parseInt(pos);
+        pos = Math.min(180,pos);
+        pos = Math.max(0,pos);
         return pos;
     };
 
