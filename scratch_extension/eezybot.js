@@ -97,7 +97,7 @@
 	    p1 = positionLimit (p1);
 	    p2 = positionLimit (p2);
             p3 = positionLimit (p3);
-            window.socket.send("setarm ") + String(p1) + " " + String(p2) + " " + String(p3) + " " + String(speed);
+            window.socket.send("setarm " + String(p1) + " " + String(p2) + " " + String(p3) + " " + String(speed));
 
         };
 
