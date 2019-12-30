@@ -19,8 +19,6 @@
     var connected = false;
     var myStatus = 1;						// initially, set light to yellow
     var myMsg = 'not_ready';
-    var pixelCount = 0;
-    var realPixelCount = 0;
 
     // General functions.
     function positionLimit (pos) {
@@ -69,7 +67,7 @@
 
     // when the set gripper block is executed
     ext.setGripper = function (pos) {
-	//pos = positionLimit (pos);
+	pos = positionLimit (pos);
         var msg = "setgripper " + String(pos);
     	window.socket.send(msg);
     };
@@ -91,7 +89,6 @@
         connected = false;
         myMsg = 'not_ready';                    // back to yellow status.
         myStatus = 1;
-        pixelCount = 0;
     };
 
     // Block and block menu descriptions
@@ -105,9 +102,9 @@
                 [" ", 'Verbind met EEZYbot server op %s poort %n.', 'cnct', "Host", "Poort"],
                 [" ", 'Verbreek verbinding met EEZYbot server', 'discnct'],
 		[" ", 'Arm neutraal', 'setNeutral'],
-		["w", 'Grijper positie %n', 'setGripper', "90"],
+		[" ", 'Grijper positie %n', 'setGripper', "90"],
 		[" ", '%m.action hekje', 'setGate', "open"],
-		[" ", 'Arm positie %n, %n, %n', 'setArm', "90", "90", "90"]
+		["w", 'Arm positie %n, %n, %n', 'setArm', "90", "90", "90"]
             ],
             "menus": {
                 "action": ["open", "sluit"]
@@ -125,9 +122,9 @@
                 [" ", 'Connect to EEZYbot server on host %s and port %n.', 'cnct', "Host", "Port"],
                 [" ", 'Disconnect from EEZYbot server', 'discnct'],
 		[" ", 'Arm neutraal', 'setNeutral'],
-		["w", 'Gripper position %n', 'setGripper', "90"],
+		[" ", 'Gripper position %n', 'setGripper', "90"],
 		[" ", '%m.action gate', 'setGate', "open"],
-		[" ", 'Arm position %n, %n, %n', 'setArm', "90", "90", "90"]
+		["w", 'Arm position %n, %n, %n', 'setArm', "90", "90", "90"]
             ],
             "menus": {
                 "action": ["open", "close"]
