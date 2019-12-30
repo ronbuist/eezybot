@@ -40,6 +40,15 @@
         	window.socket.send("init");
 	};
 
+
+        // Onmessage handler to receive the result. This is just an OK
+        // which we will ignore further.
+        window.socket.onmessage = function (message) {
+
+            // Callback to let Scratch know the arm is moved to the position.
+            callback();
+        };
+
         // change status light from yellow to green.
         myMsg = 'ready';
         connected = true;
@@ -101,13 +110,6 @@
 
         };
 
-        // Onmessage handler to receive the result. This is just an OK
-        // which we will ignore further.
-        window.socket.onmessage = function (message) {
-
-            // Callback to let Scratch know the arm is moved to the position.
-            callback();
-        };
 
     // Block and block menu descriptions
     var lang = navigator.language || navigator.userLanguage;
