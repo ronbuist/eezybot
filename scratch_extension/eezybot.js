@@ -40,15 +40,6 @@
         	window.socket.send("init");
 	};
 
-
-        // Onmessage handler to receive the result. This is just an OK
-        // which we will ignore further.
-        window.socket.onmessage = function (message) {
-
-            // Callback to let Scratch know the arm is moved to the position.
-            callback();
-        };
-
         // change status light from yellow to green.
         myMsg = 'ready';
         connected = true;
@@ -101,14 +92,22 @@
     };
 
     // when the setArm block is executed.
-    ext.setArm = function (p1, p2, p3 , speed, callback) {
+    ext.setArm = function (p1, p2, p3, speed, callback) {
 
-	    p1 = positionLimit (p1);
-	    p2 = positionLimit (p2);
-            p3 = positionLimit (p3);
-            window.socket.send("setarm " + String(p1) + " " + String(p2) + " " + String(p3) + " " + String(speed));
+        // Onmessage handler to receive the result. This is just an OK
+        // which we will ignore further.
+        window.socket.onmessage = function (message) {
 
+            // Callback to let Scratch know the arm is moved to the position.
+            callback();
         };
+
+	p1 = positionLimit (p1);
+	p2 = positionLimit (p2);
+        p3 = positionLimit (p3);
+        window.socket.send("setarm " + String(p1) + " " + String(p2) + " " + String(p3) + " " + String(speed));
+
+    };
 
 
     // Block and block menu descriptions
