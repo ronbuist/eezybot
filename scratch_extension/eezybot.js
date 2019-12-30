@@ -91,6 +91,24 @@
         myStatus = 1;
     };
 
+    // when the setArm block is executed.
+    ext.setArm = function (p1, p2, p3 , speed, callback) {
+
+	    p1 = positionLimit (p1);
+	    p2 = positionLimit (p2);
+            p3 = positionLimit (p3);
+            window.socket.send("setarm ") + String(p1) + " " + String(p2) + " " + String(p3) + " " + String(speed);
+
+        };
+
+        // Onmessage handler to receive the result. This is just an OK
+        // which we will ignore further.
+        window.socket.onmessage = function (message) {
+
+            // Callback to let Scratch know the arm is moved to the position.
+            callback();
+        };
+
     // Block and block menu descriptions
     var lang = navigator.language || navigator.userLanguage;
     lang = lang.toUpperCase();
@@ -104,7 +122,7 @@
 		[" ", 'Arm neutraal', 'setNeutral'],
 		[" ", 'Grijper positie %n', 'setGripper', "90"],
 		[" ", '%m.action hekje', 'setGate', "open"],
-		["w", 'Arm positie %n, %n, %n', 'setArm', "90", "90", "90"]
+		["w", 'Arm positie %n, %n, %n snelheid %n', 'setArm', "90", "90", "90", "40"]
             ],
             "menus": {
                 "action": ["open", "sluit"]
@@ -124,7 +142,7 @@
 		[" ", 'Arm neutraal', 'setNeutral'],
 		[" ", 'Gripper position %n', 'setGripper', "90"],
 		[" ", '%m.action gate', 'setGate', "open"],
-		["w", 'Arm position %n, %n, %n', 'setArm', "90", "90", "90"]
+		["w", 'Arm position %n, %n, %n at speed %n', 'setArm', "90", "90", "90", "40"]
             ],
             "menus": {
                 "action": ["open", "close"]
